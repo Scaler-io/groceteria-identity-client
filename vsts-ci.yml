@@ -8,14 +8,14 @@ resources:
 
 pool:
   name: "Azure Pipelines"
-  vmImage: "ubuntu-20.04"
+  vmImage: "ubuntu-latest"
 
 steps:
   # 1. Specify the node version
   - task: NodeTool@0
-    displayName: "Install Node.js"
+    displayName: "Install Node.js 14.x"
     inputs:
-      versionSpec: "13.x"
+      versionSpec: "14.x"
   # 2. Install npm packages
   - task: Npm@1
     displayName: "Install packages"
@@ -23,7 +23,7 @@ steps:
       verbose: false
   # 3.Install dependencies
   - script: |
-      npm install -g @angular/cli
+      npm install -g @angular/cli@13
       npm install karma jasmine-core --save-dev
     displayName: "npm install"
   # 4. Run the unit tests
