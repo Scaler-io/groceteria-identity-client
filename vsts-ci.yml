@@ -35,7 +35,7 @@ steps:
     inputs:
       command: custom
       verbose: false
-      customCommand: "run: build:prod"
+      customCommand: "run build:prod"
   # 6. Publish the build
   - task: PublishBuildArtifacts@1
     displayName: "Publish Artifact: groceteria-identity-client"
