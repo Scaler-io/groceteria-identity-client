@@ -24,7 +24,7 @@ steps:
   # 3.Install dependencies
   - script: |
       npm install -g @angular/cli
-      npm install karma jasmine-core karma-junit-reporter puppeteer --save-dev
+      npm install karma jasmine-core puppeteer --save-dev
     displayName: "npm install"
   # 4. Run the unit tests
   - script: npm run test
