@@ -15,7 +15,7 @@ steps:
   - task: NodeTool@0
     displayName: "Install Node.js"
     inputs:
-      versionSpec: $(node_version)
+      versionSpec: "13.x"
   # 2. Install npm packages
   - task: Npm@1
     displayName: "Install packages"
