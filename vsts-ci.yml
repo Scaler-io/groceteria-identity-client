@@ -4,42 +4,42 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
-- feature/**
+  - master
+  - feature/**
 
 pool:
-  name: 'Azure Pipeline' 
+  name: "Azure Pipeline"
   vmImage: ubuntu-latest
 
 steps:
-# 1. Specify the node version
-- task: NodeTool@0
-  displayName: 'Install Node.js'
-  inputs:
-    versionSpec: $(node_version)
-# 2. Install npm packages
-- task: Npm@1
-  displayName: 'Install packages'
-  inputs:
-    verbose: false
-# 3.Install dependencies
-- script: | 
-    npm install -g @angular/cli
-    npm install karma jasmine-core karma-junit-reporter puppeteer --save-dev
-  displayName: 'npm install'
-# 4. Run the unit tests
-- script: npm run test
-  displayName: 'npm run test'
-# 5. Run the prod build
-- task: Npm@1
-  displayName: 'npm build prod'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run: build:prod'
-# 6. Publish the build
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: groceteria-identity-client'
-  inputs:
-    PathtoPublish: dist
-    ArtifactName: 'groceteria-identity-client'
+  # 1. Specify the node version
+  - task: NodeTool@0
+    displayName: "Install Node.js"
+    inputs:
+      versionSpec: $(node_version)
+  # 2. Install npm packages
+  - task: Npm@1
+    displayName: "Install packages"
+    inputs:
+      verbose: false
+  # 3.Install dependencies
+  - script: |
+      npm install -g @angular/cli
+      npm install karma jasmine-core karma-junit-reporter puppeteer --save-dev
+    displayName: "npm install"
+  # 4. Run the unit tests
+  - script: npm run test
+    displayName: "npm run test"
+  # 5. Run the prod build
+  - task: Npm@1
+    displayName: "npm build prod"
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: "run: build:prod"
+  # 6. Publish the build
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact: groceteria-identity-client"
+    inputs:
+      PathtoPublish: dist
+      ArtifactName: "groceteria-identity-client"
