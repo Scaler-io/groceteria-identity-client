@@ -1,0 +1,71 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/mixins";
+
+.navbar__main {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  .navbar-wrapper {
+    &--logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 5rem 1rem 0;
+      width: 23%;
+      @include for-phone-only-up {
+        width: auto;
+      }
+      & .navbar-brand {
+        display: flex;
+        align-items: center;
+        &--img {
+          width: 75px;
+        }
+        &--text {
+          font-weight: 600;
+          font-size: 2.2rem;
+          background: linear-gradient(60deg, #5bdda9, #12e29d, #0cbd8b);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          letter-spacing: 2px;
+          @include for-phone-only-up {
+            display: none;
+          }
+        }
+      }
+    }
+    &--menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-left: 2rem;
+      padding-right: 5rem;
+      @include for-phone-only-up {
+        flex-direction: row-reverse;
+        padding-right: 3rem;
+      }
+      & .menu-toggler {
+        i {
+          font-size: 16px;
+          cursor: pointer;
+          color: $color-gray-400;
+        }
+      }
+      & .menu-container {
+        display: flex;
+        column-gap: 40px;
+        align-items: center;
+        @include for-phone-only-up {
+          display: none;
+        }
+        & .menu-item {
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
