@@ -1,14 +1,24 @@
 <nav class="navbar__main">
-  <div class="navbar-wrapper--logo">
+  <div class="navbar-wrapper--logo" [class.collapsed-header]="sidenavToggleState">
     <a class="navbar-brand">
-        <img class="navbar-brand--img" src="../../../../assets/images/groceteria-logo-no-bg.png" alt="groceteria"/>
-        <span class="navbar-brand--text">Groceteria</span>  
+      <img
+        [class.hidden]="isMobileScreen || sidenavToggleState"
+        class="navbar-brand--img"
+        src="../../../../assets/images/logo.PNG"
+        alt="groceteria"
+      />
+      <img
+        [class.hidden]="!isMobileScreen && !sidenavToggleState"
+        class="navbar-brand--img--mini"
+        src="../../../../assets/images/logo_mini.PNG"
+        alt="groceteria"
+      />
     </a>
   </div>
   <div class="navbar-wrapper--menu">
-    <div class="menu-toggler">
+    <button class="menu-toggler" (click)="toggleSidenav()">
       <i class="fa fa-bars"></i>
-    </div>
+    </button>
     <ul class="menu-container">
       <li class="menu-item">
         <groceteria-user-avatar userName="Sharthak"></groceteria-user-avatar>
@@ -17,8 +27,10 @@
         <mat-icon class="material-symbols-outlined">notifications</mat-icon>
       </li>
       <li class="menu-item">
-        <mat-icon matRipple class="material-symbols-outlined">power_settings_new</mat-icon>
+        <mat-icon matRipple class="material-symbols-outlined"
+          >power_settings_new</mat-icon
+        >
       </li>
-  </ul>
+    </ul>
   </div>
 </nav>

@@ -11,7 +11,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* width */
@@ -71,17 +71,24 @@ body {
   cursor: not-allowed !important;
 }
 
-ul{
-  li{
+ul {
+  li {
     list-style: none;
   }
 }
 
+// .material-symbols-outlined {
+//   font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
+// }
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 200,
-  'GRAD' 0,
-  'opsz' 20
+  font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 20;
+}
+
+.visible {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
 }

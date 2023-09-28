@@ -1,7 +1,8 @@
 <div class="groceteria-root-content">
   <groceteria-app-header></groceteria-app-header>
   <main class="app__main">
-    <div class="app__main-content">
+    <groceteria-sidenav></groceteria-sidenav>
+    <div class="app__main-content" [class.superposition]="isMobileView && !sidenavToggleState">
       <div class="lorem">lorem*1000</div>
     </div>
   </main>

@@ -10,6 +10,7 @@ import { appReducers } from './store/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { AppMaterialModule } from './app-material.module';
 import { AppHeaderModule } from './shared/components/app-header/app-header.module';
+import { SidenavModule } from './features/sidenav/sidenav.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { AppHeaderModule } from './shared/components/app-header/app-header.modul
     AppRoutingModule,
     AppMaterialModule,
     AppHeaderModule,
+    SidenavModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
