@@ -1,4 +1,20 @@
-<div class="user-avatar">
+<div
+  class="user-avatar"
+  [matMenuTriggerFor]="userActionMenu"
+  #userMenuTrigger="matMenuTrigger"
+>
   <div class="user-avatar--initial">{{ userName | grcNameShorthand }}</div>
-  <div class="user-avatar--text">{{ userName }}</div>
+  <div class="user-avatar--text">
+    <span>{{ userName }}</span>
+    <mat-icon class="material-symbols-outlined" aria-label="usermenu">{{
+      userMenuTrigger.menuOpen ? "expand_less" : "expand_more"
+    }}</mat-icon>
+  </div>
 </div>
+
+<mat-menu #userActionMenu="matMenu" yPosition="below" xPosition="before">
+  <button mat-menu-item>
+    <mat-icon class="material-symbols-outlined">power_settings_new</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

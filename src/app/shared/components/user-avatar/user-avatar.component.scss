@@ -12,7 +12,13 @@
     background-color: $color-green-300;
     color: #fff;
   }
-  &--text{
+  &--text {
+    display: flex;
+    align-items: center;
     font-size: 14px;
   }
+}
+
+.material-symbols-outlined {
+  color: $color-gray-400;
 }

@@ -8,6 +8,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 const globalRippleConfig: RippleGlobalOptions = {
   disabled: false,
@@ -21,6 +22,7 @@ const MaterialComponentModules = [
   MatButtonModule,
   MatRippleModule,
   MatIconModule,
+  MatMenuModule,
 ];
 
 @NgModule({
