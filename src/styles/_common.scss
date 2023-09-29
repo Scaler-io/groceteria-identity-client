@@ -96,3 +96,9 @@ ul {
 // .mat-menu-panel {
 //   border: 1px solid red;
 // }
+
+.mat-progress-spinner {
+  circle {
+    stroke: $color-green-500 !important;
+  }
+}

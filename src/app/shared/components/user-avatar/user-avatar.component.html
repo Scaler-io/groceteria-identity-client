@@ -13,8 +13,8 @@
 </div>
 
 <mat-menu #userActionMenu="matMenu" yPosition="below" xPosition="before">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="pressSignoff()">
     <mat-icon class="material-symbols-outlined">power_settings_new</mat-icon>
-    <span>Logout</span>
+    <span>Signoff</span>
   </button>
 </mat-menu>

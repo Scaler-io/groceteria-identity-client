@@ -2,8 +2,10 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/app.state';
 import { getSidenavToggleState } from './state/sidenav/sidenav.selector';
+import { AuthService } from './core/auth/auth.service';
 
 import * as mobileViewActions from './state/mobile-view/mobile-view.action';
+import * as authActions from './state/auth/auth.action';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +15,12 @@ import * as mobileViewActions from './state/mobile-view/mobile-view.action';
 export class AppComponent implements OnInit, OnDestroy {
   public sidenavToggleState: boolean;
   public isMobileView: boolean;
+  public isAuthenticated: boolean;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private authService: AuthService
+  ) {}
 
   private subscriptions = {
     sidenavToggle: null,
@@ -34,12 +40,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.chekIfMobileView();
-    
+
     this.subscriptions.sidenavToggle = this.store
       .select(getSidenavToggleState)
       .subscribe((response) => {
         this.sidenavToggleState = response;
       });
+
+    this.authService.isAuthenticated().subscribe((response) => {
+      this.isAuthenticated = response.isAuthenticated;
+      if (!response.isAuthenticated) {
+        this.authService.authorize();
+      } else {
+        this.store.dispatch(new authActions.SetAuthState(response));
+      }
+    });
   }
 
   ngOnDestroy(): void {

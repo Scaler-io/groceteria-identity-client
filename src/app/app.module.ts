@@ -12,6 +12,7 @@ import { AppMaterialModule } from './app-material.module';
 import { AppHeaderModule } from './shared/components/app-header/app-header.module';
 import { SidenavModule } from './features/sidenav/sidenav.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthModule } from 'angular-auth-oidc-client';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppMaterialModule,
     AppHeaderModule,
     SidenavModule,
+    AuthModule.forRoot({
+      config: environment.config.oidcConfig,
+    }),
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducers),

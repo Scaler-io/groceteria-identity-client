@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const globalRippleConfig: RippleGlobalOptions = {
   disabled: false,
@@ -23,6 +24,7 @@ const MaterialComponentModules = [
   MatRippleModule,
   MatIconModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

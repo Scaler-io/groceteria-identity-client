@@ -23,8 +23,8 @@
       <i class="fa fa-bars"></i>
     </button>
     <ul class="menu-container">
-      <li class="menu-item">
-        <groceteria-user-avatar userName="Sharthak"></groceteria-user-avatar>
+      <li class="menu-item" *ngIf="!!authUser">
+        <groceteria-user-avatar [userName]="authUser.firstName"></groceteria-user-avatar>
       </li>
       <li class="menu-item">
         <mat-icon class="material-symbols-outlined">notifications</mat-icon>
