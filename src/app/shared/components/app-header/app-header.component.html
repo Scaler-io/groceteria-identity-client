@@ -1,0 +1,39 @@
+<nav class="navbar__main">
+  <div
+    class="navbar-wrapper--logo"
+    [class.collapsed-header]="sidenavToggleState"
+  >
+    <a class="navbar-brand">
+      <img
+        [class.hidden]="isMobileScreen || sidenavToggleState"
+        class="navbar-brand--img"
+        src="../../../../assets/images/logo.PNG"
+        alt="groceteria"
+      />
+      <img
+        [class.hidden]="!isMobileScreen && !sidenavToggleState"
+        class="navbar-brand--img--mini"
+        src="../../../../assets/images/logo_mini.PNG"
+        alt="groceteria"
+      />
+    </a>
+  </div>
+  <div class="navbar-wrapper--menu">
+    <button class="menu-toggler" (click)="toggleSidenav()">
+      <i class="fa fa-bars"></i>
+    </button>
+    <ul class="menu-container">
+      <li class="menu-item">
+        <groceteria-user-avatar userName="Sharthak"></groceteria-user-avatar>
+      </li>
+      <li class="menu-item">
+        <mat-icon class="material-symbols-outlined">notifications</mat-icon>
+      </li>
+      <li class="menu-item">
+        <mat-icon matRipple class="material-symbols-outlined"
+          >power_settings_new</mat-icon
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

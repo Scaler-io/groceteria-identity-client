@@ -1,0 +1,79 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/mixins";
+
+.navbar__main {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  min-height: 75px !important;
+  background-color: #fff;
+  .navbar-wrapper {
+    &--logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.3rem 5rem 1.3rem 0;
+      width: 23%;
+      transition: all 0.1s ease-in-out !important;
+      @include for-phone-only-up {
+        width: auto;
+      }
+      & .navbar-brand {
+        display: flex;
+        align-items: center;
+        &--img {
+          width: 150px;
+          &--mini {
+            width: 55px;
+            @include for-phone-only-up {
+              display: block !important;
+            }
+          }
+        }
+      }
+    }
+    &--menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-left: 2rem;
+      padding-right: 5rem;
+      @include for-phone-only-up {
+        flex-direction: row-reverse;
+        padding-right: 3rem;
+      }
+      & .menu-toggler {
+        background-color: transparent;
+        border: none;
+        i {
+          font-size: 16px;
+          cursor: pointer;
+          color: $color-gray-400;
+        }
+      }
+      & .menu-container {
+        display: flex;
+        column-gap: 40px;
+        align-items: center;
+        @include for-phone-only-up {
+          display: none;
+        }
+        & .menu-item {
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.collapsed-header {
+  width: 90px !important;
+  padding: 0 0 0 10px !important;
+}
+
+.material-symbols-outlined {
+  color: $color-gray-400;
+}
