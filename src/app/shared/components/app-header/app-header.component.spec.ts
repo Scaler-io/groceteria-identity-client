@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppHeaderComponent } from './app-header.component';
+import { StoreModule } from '@ngrx/store';
 
 describe('AppHeaderComponent', () => {
   let component: AppHeaderComponent;
@@ -8,9 +9,9 @@ describe('AppHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [AppHeaderComponent],
+      imports: [StoreModule.forRoot({})],
+    }).compileComponents();
   });
 
   beforeEach(() => {
