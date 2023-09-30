@@ -7,3 +7,8 @@
     </div>
   </main>
 </div>
+
+<div class="loader__overlay" [class.overlay__hidden]="!isAppBusy && isAuthenticated">
+  <mat-spinner diameter="40"></mat-spinner>
+  <div class="loader__overlay-text">Please wait</div>
+</div>
