@@ -6,6 +6,13 @@ import { AuthService } from './core/auth/auth.service';
 
 import * as mobileViewActions from './state/mobile-view/mobile-view.action';
 import * as authActions from './state/auth/auth.action';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +23,12 @@ export class AppComponent implements OnInit, OnDestroy {
   public sidenavToggleState: boolean;
   public isMobileView: boolean;
   public isAuthenticated: boolean;
+  public isAppBusy: boolean = true;
 
   constructor(
     private store: Store<AppState>,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   private subscriptions = {
@@ -39,6 +48,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isAppBusy = true;
+      }
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          this.isAppBusy = false;
+        }, 1000);
+      }
+    });
+
     this.chekIfMobileView();
 
     this.subscriptions.sidenavToggle = this.store
