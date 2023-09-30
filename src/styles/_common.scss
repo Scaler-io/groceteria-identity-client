@@ -102,3 +102,15 @@ ul {
     stroke: $color-green-500 !important;
   }
 }
+
+.route-active {
+  a {
+    span {
+      font-weight: 500;
+      color: $color-green-500 !important;
+    }
+    .icon {
+      color: $color-green-500 !important;
+    }
+  }
+}

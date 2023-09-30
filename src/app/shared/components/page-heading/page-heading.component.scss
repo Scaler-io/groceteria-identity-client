@@ -1,0 +1,39 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/mixins";
+
+.page-heading__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 3rem;
+  background-color: transparent;
+  .page-name {
+    display: flex;
+    align-items: center;
+    column-gap: 1.2rem;
+    margin-right: 30px !important;
+    font-size: 16px;
+    @include for-phone-only-up {
+      font-size: 14px;
+    }
+    span {
+      &:nth-child(1) {
+        padding: 8px;
+        border-radius: 3px;
+        background: $color-gradient-1;
+        color: #fff;
+        @include for-phone-only-up {
+          padding: 2px;
+        }
+      }
+      &:nth-child(2) {
+        color: $color-gray-600;
+      }
+    }
+  }
+  .page-breadcrumb {
+    font-size: 1.2rem;
+    color: $color-gray-600;
+  }
+}

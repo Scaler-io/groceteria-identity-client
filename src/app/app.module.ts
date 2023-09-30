@@ -13,6 +13,7 @@ import { AppHeaderModule } from './shared/components/app-header/app-header.modul
 import { SidenavModule } from './features/sidenav/sidenav.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from 'angular-auth-oidc-client';
+import { PageHeadingModule } from './shared/components/page-heading/page-heading.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
     AppMaterialModule,
     AppHeaderModule,
     SidenavModule,
+    PageHeadingModule,
     AuthModule.forRoot({
       config: environment.config.oidcConfig,
     }),

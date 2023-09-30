@@ -3,7 +3,8 @@
   <main class="app__main">
     <groceteria-sidenav></groceteria-sidenav>
     <div class="app__main-content" [class.superposition]="isMobileView && !sidenavToggleState">
-      <div class="lorem">lorem*1000</div>
+      <groceteria-page-heading></groceteria-page-heading>
+      <router-outlet></router-outlet>
     </div>
   </main>
 </div>

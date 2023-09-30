@@ -49,10 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
+      if (event instanceof NavigationStart && this.router.url === '/') {
         this.isAppBusy = true;
-      }
-      if (event instanceof NavigationEnd) {
+      } else {
         setTimeout(() => {
           this.isAppBusy = false;
         }, 1000);
