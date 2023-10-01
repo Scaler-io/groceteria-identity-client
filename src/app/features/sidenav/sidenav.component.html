@@ -1,31 +1,57 @@
-<div class="sidenav__main" [class.sidenav-collapsed]="!isMobileView && sidenavToggleState" 
- [class.sidenav-mobile-opened]="isMobileView && sidenavToggleState"
+<div
+  class="sidenav__main"
+  [class.sidenav-collapsed]="!isMobileView && sidenavToggleState"
+  [class.sidenav-mobile-opened]="isMobileView && sidenavToggleState"
 >
   <ul class="sidenav__nav">
-    <li class="sidenav__nav-item mb-5" routerLink="dashboard" routerLinkActive="route-active" >
+    <li
+      class="sidenav__nav-item mb-5"
+      routerLink="dashboard"
+      routerLinkActive="route-active"
+      (click)="isMobileView ? collapseSideNav() : openSideNav()"
+    >
       <a class="sidenav__nav-item-link">
-        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title">Dashboard</span>
+        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title"
+          >Dashboard</span
+        >
         <mat-icon class="material-symbols-outlined icon">dashboard</mat-icon>
       </a>
     </li>
 
-    <li class="sidenav__nav-item mb-5" routerLink="client" routerLinkActive="route-active" > 
-      <a class="sidenav__nav-item-link" >
-        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title">Api Clients</span>
+    <li
+      class="sidenav__nav-item mb-5"
+      routerLink="client"
+      routerLinkActive="route-active"
+      (click)="isMobileView ? collapseSideNav() : openSideNav()"
+    >
+      <a class="sidenav__nav-item-link">
+        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title"
+          >Api Clients</span
+        >
         <mat-icon class="material-symbols-outlined icon">devices</mat-icon>
       </a>
     </li>
 
-    <li class="sidenav__nav-item mb-5">
+    <li
+      class="sidenav__nav-item mb-5"
+      (click)="isMobileView ? collapseSideNav() : openSideNav()"
+    >
       <a class="sidenav__nav-item-link">
-        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title">Scopes</span>
+        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title"
+          >Scopes</span
+        >
         <mat-icon class="material-symbols-outlined">dashboard</mat-icon>
       </a>
     </li>
 
-    <li class="sidenav__nav-item mb-5">
+    <li
+      class="sidenav__nav-item mb-5"
+      (click)="isMobileView ? collapseSideNav() : openSideNav()"
+    >
       <a class="sidenav__nav-item-link">
-        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title">Identity Resources</span>
+        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title"
+          >Identity Resources</span
+        >
         <mat-icon class="material-symbols-outlined">dashboard</mat-icon>
       </a>
     </li>

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SidenavComponent],
-  imports: [CommonModule, AppMaterialModule, RouterModule ],
+  imports: [CommonModule, AppMaterialModule, RouterModule],
   exports: [SidenavComponent],
 })
 export class SidenavModule {}

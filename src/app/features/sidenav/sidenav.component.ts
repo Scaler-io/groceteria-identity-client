@@ -1,6 +1,16 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getMobileViewState } from 'src/app/state/mobile-view/mobile-view.selector';
+import { SidenavToggleSet } from 'src/app/state/sidenav/sidenav.action';
 import { getSidenavToggleState } from 'src/app/state/sidenav/sidenav.selector';
 import { AppState } from 'src/app/store/app.state';
 
@@ -12,6 +22,11 @@ import { AppState } from 'src/app/store/app.state';
 export class SidenavComponent implements OnInit, OnDestroy {
   public sidenavToggleState: boolean;
   public isMobileView: boolean;
+
+  @ViewChild(
+    'sidenavMenuItem1, sidenavMenuItem2, sidenavMenuItem3, sidenavMenuItem4, sidenavMenuItem5'
+  )
+  sidenavMenuItems: QueryList<ElementRef>;
 
   constructor(private store: Store<AppState>) {}
 
@@ -40,6 +55,16 @@ export class SidenavComponent implements OnInit, OnDestroy {
     }
     if (this.subscriptions.mobileViewState) {
       this.subscriptions.mobileViewState.unsubscribe();
+    }
+  }
+
+  public collapseSideNav() {
+    this.store.dispatch(new SidenavToggleSet(false));
+  }
+
+  public openSideNav() {
+    if (this.sidenavToggleState) {
+      this.store.dispatch(new SidenavToggleSet(false));
     }
   }
 }

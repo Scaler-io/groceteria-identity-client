@@ -6,13 +6,7 @@ import { AuthService } from './core/auth/auth.service';
 
 import * as mobileViewActions from './state/mobile-view/mobile-view.action';
 import * as authActions from './state/auth/auth.action';
-import {
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  NavigationStart,
-  Router,
-} from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
