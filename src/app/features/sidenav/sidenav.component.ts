@@ -1,8 +1,6 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   OnDestroy,
   OnInit,
   QueryList,

@@ -14,10 +14,12 @@ import { SidenavModule } from './features/sidenav/sidenav.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from 'angular-auth-oidc-client';
 import { PageHeadingModule } from './shared/components/page-heading/page-heading.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     AppMaterialModule,

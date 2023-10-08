@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { AutoLoginAllRoutesGuard } from 'angular-auth-oidc-client';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       import('./features/api-client/api-client.module').then(
         (m) => m.ApiClientModule
       ),
+    canActivate: [AutoLoginAllRoutesGuard],
     data: { breadcrumb: { label: 'Clients' } },
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

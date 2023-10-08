@@ -1,5 +1,6 @@
 export interface IConfig {
   oidcConfig: OidcConfig;
+  identityApiConfig: IdentityApiConfig;
 }
 
 interface OidcConfig {
@@ -12,4 +13,9 @@ interface OidcConfig {
   silentRenew: boolean;
   useRefreshToken: boolean;
   logLevel: number;
+}
+
+interface IdentityApiConfig {
+  identityManagerApiUrl: string;
+  subscriptionKey: string;
 }

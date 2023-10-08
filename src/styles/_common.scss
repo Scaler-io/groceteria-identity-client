@@ -114,3 +114,32 @@ ul {
     }
   }
 }
+
+table {
+  tr.mat-header-row {
+    background: $color-green-500 !important;
+    th.mat-header-cell {
+      border: none;
+      color: #fff;
+      text-align: center;
+    }
+  }
+
+  tbody {
+    .mat-cell {
+      border: none;
+      font-size: 12px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      text-align: center;
+    }
+  }
+}
+
+.mat-menu-panel {
+  .mat-menu-content {
+    .mat-menu-item {
+      cursor: pointer;
+    }
+  }
+}

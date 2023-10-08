@@ -1,3 +1,4 @@
+import { API_CLIENT_STATE_NAME, ApiClientState } from '../state/api-client/api-client.reducer';
 import { AUTH_STATE_NAME, AuthState, authReducer } from '../state/auth/auth.reducer';
 import { MOBILE_VIEW_STATE_NAME, MobileViewState, mobileViewReducer } from '../state/mobile-view/mobile-view.reducer';
 import {
@@ -11,6 +12,7 @@ export interface AppState {
   [SIDENAV_STATE_NAME]: SidenavState;
   [MOBILE_VIEW_STATE_NAME]: MobileViewState;
   [AUTH_STATE_NAME]: AuthState;
+  [API_CLIENT_STATE_NAME]: ApiClientState;
 }
 
 export const appReducers = {

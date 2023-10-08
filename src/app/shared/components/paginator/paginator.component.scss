@@ -1,0 +1,16 @@
+.paginator__main {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  .paginator__previous-button{
+    text-align: right;
+  }
+
+  .paginator__next-button{
+    text-align: left;
+  }
+}

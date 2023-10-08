@@ -11,9 +11,13 @@ export const environment = {
       clientId: 'bc916d46-3ff6-434d-8c88-5c16e5a7571a',
       scope: 'openid profile roles email groceteria.identitymanager.api',
       responseType: 'code',
-      silentRenew: false,
+      silentRenew: true,
       useRefreshToken: true,
       logLevel: LogLevel.None,
+    },
+    identityApiConfig: {
+      identityManagerApiUrl: 'https://localhost:5010/identity',
+      subscriptionKey: '73595fa8955e4d13bca129f4f84b0a46',
     },
   },
 };

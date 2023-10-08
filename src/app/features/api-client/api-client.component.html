@@ -1,3 +1,130 @@
+<groceteria-data-search
+  (filter)="apiClientFilter($event)"
+></groceteria-data-search>
 <div class="container api-client__section-main mb-5">
-    lorem*1000
+  <div *ngIf="!dataFound && isApiDataLoaded" class="api-client__no-data">
+    No data found!
+  </div>
+  <table
+    *ngIf="dataFound"
+    mat-table
+    class="api-client__table"
+    [dataSource]="apiClients"
+  >
+    <ng-container matColumnDef="clientName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="api-client__table-header--clientName"
+      >
+        Client Name
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="api-client__table-data--clientName"
+      >
+        {{ element.clientName | camelCaseSpacer }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="clientId">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="api-client__table-header--clientId"
+      >
+        Client Id
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="api-client__table-data--clientId"
+      >
+        {{ element.clientId }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="clientDescription">
+      <th mat-header-cell *matHeaderCellDef>Client Description</th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element.clientDescription | textShorten ) ?? "Not available" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="accessTokenLifetime">
+      <th mat-header-cell *matHeaderCellDef>Token lifetime</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.accessTokenLifetime | formatTime }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="enabled">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="api-client__table-header--online"
+      >
+        Online
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="api-client__table-data--online"
+      >
+        {{ element.enabled }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="api-client__table-header--createdOn"
+      >
+        CreatedOn
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="api-client__table-data--createdOn"
+      >
+        {{ element.created | formatDate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="api-client__table-header--action"
+      >
+        Action
+      </th>
+      <td mat-cell *matCellDef class="api-client__table-data--action">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="actionMenu"
+          class="api-client__action-button"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #actionMenu="matMenu" xPosition="before">
+          <button mat-menu-item>View</button>
+          <button mat-menu-item>Edit</button>
+          <button mat-menu-item>Delete</button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- <groceteria-paginator></groceteria-paginator> -->
+  <mat-spinner
+    *ngIf="!isApiDataLoaded"
+    diameter="30"
+    class="api-client-loader"
+  ></mat-spinner>
 </div>

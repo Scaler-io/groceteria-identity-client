@@ -1,0 +1,19 @@
+@import "../../../../styles/colors";
+
+.data-search__main {
+  padding: 15px 55px 5px 20px !important;
+  width: 100% !important;
+  .search-prefix-icon {
+    font-size: 20px !important;
+    color: $color-gray-400;
+    margin-right: 10px;
+  }
+  .data-search__input {
+    &--label {
+      font-size: 14px !important;
+    }
+    &--text {
+      font-size: 14px;
+    }
+  }
+}

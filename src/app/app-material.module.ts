@@ -10,6 +10,9 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const globalRippleConfig: RippleGlobalOptions = {
   disabled: false,
@@ -24,6 +27,9 @@ const MaterialComponentModules = [
   MatRippleModule,
   MatIconModule,
   MatMenuModule,
+  MatTableModule,
+  MatInputModule,
+  MatFormFieldModule,
   MatProgressSpinnerModule,
 ];
 
