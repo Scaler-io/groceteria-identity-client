@@ -11,7 +11,7 @@ export const environment = {
       clientId: 'bc916d46-3ff6-434d-8c88-5c16e5a7571a',
       scope: 'openid profile roles email groceteria.identitymanager.api',
       responseType: 'code',
-      silentRenew: true,
+      silentRenew: false,
       useRefreshToken: true,
       logLevel: LogLevel.None,
     },

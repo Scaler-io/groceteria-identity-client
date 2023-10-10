@@ -1,7 +1,21 @@
 <div class="paginator__main row">
-  <div class="paginator__previous-button col-md-3">prev</div>
-  <div class="col-md-6">
-    <span class=""></span>
+  <div class="paginator__previous-button col-md-3">
+    <button mat-icon-button (click)="prevPage()" *ngIf="currentPage !== 1">
+      <span class="material-symbols-outlined">arrow_back_ios</span>
+    </button>
   </div>
-  <div class="paginator__next-button col-md-3">next</div>
+  <div class="col-md-6 paginator__page-count">
+    <span
+      class="page__circle"
+      [class.page-active]="currentPage === page"
+      *ngFor="let page of pageArrays"
+      (click)="selectPage(page)"
+      >{{ page }}</span
+    >
+  </div>
+  <div class="paginator__next-button col-md-3" >
+    <button mat-icon-button (click)="nextPage()" *ngIf="currentPage < totalPages">
+      <span class="material-symbols-outlined">arrow_forward_ios</span>
+    </button>
+  </div>
 </div>

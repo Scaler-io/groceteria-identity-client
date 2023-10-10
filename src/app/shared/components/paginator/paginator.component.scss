@@ -1,16 +1,49 @@
+@import "../../../../styles/colors";
+
 .paginator__main {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  margin-top: 50px;
   width: 100%;
-  border: 1px solid red;
   text-align: center;
   padding: 15px;
-  .paginator__previous-button{
+  .paginator__previous-button {
     text-align: right;
+    button {
+      span {
+        font-size: 18px;
+      }
+    }
   }
 
-  .paginator__next-button{
+  .paginator__next-button {
     text-align: left;
+    button {
+      span {
+        font-size: 18px;
+      }
+    }
   }
+
+  .paginator__page-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+    .page__circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
+      border-radius: 50%;
+      color: $color-green-500;
+      border: 1px solid $color-green-500;
+    }
+  }
+}
+
+.page-active {
+  background-color: $color-green-500 !important;
+  color: #fff !important;
 }

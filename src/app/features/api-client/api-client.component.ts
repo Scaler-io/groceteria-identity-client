@@ -1,12 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { getApiList } from 'src/app/state/api-client/api-client.selector';
+import {
+  getApiList,
+  getApiTotal,
+  getPaginationMetaData,
+} from 'src/app/state/api-client/api-client.selector';
 import { ApiClientSummary } from 'src/app/core/models/api-client';
 import * as moment from 'moment';
 
 import * as apiClientActions from '../../state/api-client/api-client.action';
 import { MatTableDataSource } from '@angular/material/table';
+import { PaginationMetadata } from 'src/app/core/models/paginated-result';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'groceteria-api-client',
@@ -16,7 +22,8 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ApiClientComponent implements OnInit, OnDestroy {
   public apiClients: MatTableDataSource<ApiClientSummary> =
     new MatTableDataSource<ApiClientSummary>([]);
-
+  public paginationMetaData: PaginationMetadata = null;
+  public totalItems: number;
   public isApiDataLoaded: boolean;
   public displayedColumns = [
     'clientName',
@@ -28,14 +35,28 @@ export class ApiClientComponent implements OnInit, OnDestroy {
     'action',
   ];
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
 
   private subscriptions = {
     apiClietList: null,
+    paginationMetadata: null,
+    totalApiCount: null,
   };
 
   ngOnInit(): void {
-    this.store.dispatch(new apiClientActions.GetApiClientListStart());
+    this.route.queryParamMap.subscribe((query) => {
+      const currentPage = +query.get('page');
+      this.store.dispatch(
+        new apiClientActions.GetApiClientListStart(currentPage)
+      );
+      this.store.dispatch(new apiClientActions.GetApiClientCount());
+    });
+
+    this.subscriptions.paginationMetadata = this.store
+      .select(getPaginationMetaData)
+      .subscribe((response) => {
+        this.paginationMetaData = response;
+      });
 
     this.subscriptions.apiClietList = this.store
       .select(getApiList)
@@ -47,11 +68,23 @@ export class ApiClientComponent implements OnInit, OnDestroy {
         }
         this.apiClients.data = response;
       });
+
+    this.subscriptions.totalApiCount = this.store
+      .select(getApiTotal)
+      .subscribe((response) => {
+        this.totalItems = response;
+      });
   }
 
   ngOnDestroy(): void {
     if (this.subscriptions.apiClietList) {
       this.subscriptions.apiClietList.unsubscribe();
+    }
+    if (this.subscriptions.paginationMetadata) {
+      this.subscriptions.paginationMetadata.unsubscribe();
+    }
+    if (this.subscriptions.totalApiCount) {
+      this.subscriptions.totalApiCount.unsubscribe();
     }
   }
 
