@@ -21,7 +21,7 @@
     <li
       class="sidenav__nav-item mb-5"
       routerLink="client"
-      [queryParams]="{ page: 1 }"
+      [queryParamsHandling]="{ ignore: true }"
       routerLinkActive="route-active"
       (click)="isMobileView ? collapseSideNav() : openSideNav()"
     >

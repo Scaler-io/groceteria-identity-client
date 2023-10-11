@@ -12,7 +12,12 @@ import * as moment from 'moment';
 import * as apiClientActions from '../../state/api-client/api-client.action';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaginationMetadata } from 'src/app/core/models/paginated-result';
-import { ActivatedRoute } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 
 @Component({
   selector: 'groceteria-api-client',
@@ -35,7 +40,11 @@ export class ApiClientComponent implements OnInit, OnDestroy {
     'action',
   ];
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   private subscriptions = {
     apiClietList: null,
@@ -44,6 +53,12 @@ export class ApiClientComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
+    if (!this.route.snapshot.queryParamMap.has('page')) {
+      const queryParams = { ...this.route.snapshot.queryParams };
+      queryParams['page'] = 1;
+      this.router.navigate([], { queryParams: queryParams });
+    }
+
     this.route.queryParamMap.subscribe((query) => {
       const currentPage = +query.get('page');
       this.store.dispatch(
