@@ -16,7 +16,7 @@ const routes: Routes = [
         (m) => m.ApiClientModule
       ),
     canActivate: [AutoLoginAllRoutesGuard],
-    data: { breadcrumb: { label: 'Clients' } },
+    data: { breadcrumb: { label: 'Clients' } }
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },

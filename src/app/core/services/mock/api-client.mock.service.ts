@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { PaginatedApiClientList } from '../../models/api-client';
+import { ApiClient, PaginatedApiClientList } from '../../models/api-client';
 
 @Injectable({ providedIn: 'root' })
 export class ApiClientMockService {
@@ -26,7 +26,13 @@ export class ApiClientMockService {
   }
 
   public getTotalApiClientCount(): Observable<number> {
-    return of(43);
+    return of(apiClientData.length);
+  }
+
+  public getApiClientDetails(clientId: string): Observable<ApiClient> {
+    const temp = sampleApiClient;
+    temp.clientId = clientId;
+    return of(temp);
   }
 }
 
@@ -462,3 +468,36 @@ const apiClientData = [
     lastAccessed: new Date('2023-11-16T08:15:00Z'),
   },
 ];
+
+const sampleApiClient = <ApiClient>{
+  id: 1,
+  enabled: true,
+  clientId: 'sample-client',
+  clientName: 'Sample Client',
+  clientDescription: 'This is a sample client for demonstration purposes',
+  allowedGrantTypes: ['authorization_code', 'client_credentials'],
+  clientSecrets: [
+    {
+      description: 'Sample Secret',
+      value: 'sample-secret-value',
+      expiration: '2030-12-31',
+    },
+  ],
+  redirectUris: ['https://example.com/callback'],
+  postLogoutRedirectUris: ['https://example.com/logout'],
+  allowedScopes: ['profile', 'email'],
+  protocolType: 'oidc',
+  accessTokenLifetime: 3600,
+  authorizationCodeLifetime: 600,
+  identityTokenLifetime: 900,
+  requireClientSecret: true,
+  alwaysSendClientClaims: false,
+  updateAccessTokenClaimsOnRefresh: false,
+  allowOfflineAccess: false,
+  requirePkce: true,
+  metaData: {
+    createdOn: '2023-10-11',
+    updatedOn: '2023-10-11',
+    lastAccessedOn: '2023-10-11',
+  },
+};

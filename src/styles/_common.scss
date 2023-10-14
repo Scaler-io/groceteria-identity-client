@@ -8,10 +8,10 @@
 html,
 body {
   font-size: 10px;
+  font-family: "Titillium Web", sans-serif !important;
 }
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
 }
 
 /* width */
@@ -77,10 +77,6 @@ ul {
   }
 }
 
-// .material-symbols-outlined {
-//   font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
-// }
-
 .material-symbols-outlined {
   font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 20;
 }
@@ -92,10 +88,6 @@ ul {
 .hidden {
   display: none !important;
 }
-
-// .mat-menu-panel {
-//   border: 1px solid red;
-// }
 
 .mat-progress-spinner {
   circle {
@@ -111,6 +103,9 @@ ul {
     }
     .icon {
       color: $color-green-500 !important;
+      .mat-badge-content {
+        color: #fff!important;
+      }
     }
   }
 }

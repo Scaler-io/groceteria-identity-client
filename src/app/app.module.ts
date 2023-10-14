@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from 'angular-auth-oidc-client';
 import { PageHeadingModule } from './shared/components/page-heading/page-heading.module';
 import { CoreModule } from './core/core.module';
+import { AppCountEffect } from './state/app-count/app-count.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import { CoreModule } from './core/core.module';
       config: environment.config.oidcConfig,
     }),
     BrowserAnimationsModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AppCountEffect]),
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,

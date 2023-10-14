@@ -20,16 +20,20 @@
 
     <li
       class="sidenav__nav-item mb-5"
-      routerLink="client"
+      [routerLink]="'client'"
       [queryParamsHandling]="{ ignore: true }"
       routerLinkActive="route-active"
       (click)="isMobileView ? collapseSideNav() : openSideNav()"
     >
       <a class="sidenav__nav-item-link">
-        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title"
-          >Api Clients</span
+        <span *ngIf="isMobileView || !sidenavToggleState" class="menu--title">
+          Api Clients
+        </span>
+        <mat-icon
+          [matBadge]="appCounts.apiClient"
+          class="material-symbols-outlined icon"
+          >devices</mat-icon
         >
-        <mat-icon class="material-symbols-outlined icon">devices</mat-icon>
       </a>
     </li>
 

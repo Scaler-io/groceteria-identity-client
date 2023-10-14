@@ -1,6 +1,8 @@
 .api-client__section-main {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   background-color: #fff;
   padding: 0;
   width: 100%;
@@ -20,6 +22,11 @@
   }
   .api-client__table {
     width: 100%;
+    font-family: "Titillium Web", sans-serif;
+    th,
+    td {
+      font-size: 14px !important;
+    }
     th.api-client__table-header {
       &--clientId {
         width: 250px;

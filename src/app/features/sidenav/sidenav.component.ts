@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { getApiClientCount } from 'src/app/state/app-count/app-count.selector';
 import { getMobileViewState } from 'src/app/state/mobile-view/mobile-view.selector';
 import { SidenavToggleSet } from 'src/app/state/sidenav/sidenav.action';
 import { getSidenavToggleState } from 'src/app/state/sidenav/sidenav.selector';
@@ -20,6 +21,9 @@ import { AppState } from 'src/app/store/app.state';
 export class SidenavComponent implements OnInit, OnDestroy {
   public sidenavToggleState: boolean;
   public isMobileView: boolean;
+  public appCounts = {
+    apiClient: 0
+  };
 
   @ViewChild(
     'sidenavMenuItem1, sidenavMenuItem2, sidenavMenuItem3, sidenavMenuItem4, sidenavMenuItem5'
@@ -31,6 +35,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private subscriptions = {
     sidenavToggleState: null,
     mobileViewState: null,
+    appCount: null,
   };
 
   ngOnInit(): void {
@@ -45,6 +50,12 @@ export class SidenavComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.isMobileView = response;
       });
+
+    this.subscriptions.appCount = this.store
+      .select(getApiClientCount)
+      .subscribe((response) => {
+        this.appCounts.apiClient = response;
+      });
   }
 
   ngOnDestroy(): void {
@@ -53,6 +64,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
     }
     if (this.subscriptions.mobileViewState) {
       this.subscriptions.mobileViewState.unsubscribe();
+    }
+    if (this.subscriptions.appCount) {
+      this.subscriptions.appCount.unsubscribe();
     }
   }
 

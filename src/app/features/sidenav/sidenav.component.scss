@@ -10,7 +10,7 @@
   min-width: 95px;
   width: 25rem;
   padding: 95px 0 0 0;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   @include for-phone-only-up {
     min-width: 0;
     width: 0;
@@ -32,8 +32,10 @@
         justify-content: space-between;
         .menu {
           &--title {
-            font-size: 14px;
+            font-size: 16px;
             color: $color-gray-500;
+            font-family: 'Titillium Web', sans-serif!important;
+            font-weight: 500!important;
           }
         }
       }

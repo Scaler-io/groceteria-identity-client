@@ -25,7 +25,3 @@ export const getPaginationMetaData = createSelector(
     };
   }
 );
-
-export const getApiTotal = createSelector(state, (state: ApiClientState) => {
-  return state.total;
-});

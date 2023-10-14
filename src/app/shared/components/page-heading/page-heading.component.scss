@@ -16,6 +16,7 @@
     column-gap: 1.2rem;
     margin-right: 30px !important;
     font-size: 16px;
+    font-family: "Titillium Web", sans-serif;
     @include for-phone-only-up {
       font-size: 14px;
     }
@@ -35,7 +36,7 @@
     }
   }
   .page-breadcrumb {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: $color-gray-600;
   }
 }

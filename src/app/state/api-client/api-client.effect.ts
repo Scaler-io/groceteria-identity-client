@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { Observable, catchError, map, switchMap } from 'rxjs';
 
 import * as apiClientActions from '../../state/api-client/api-client.action';
-import { ApiClientMockService } from 'src/app/core/services/mock/api-client.mock.service';
+import { ApiClientService } from 'src/app/core/services/api-client.service';
 
 @Injectable({ providedIn: 'root' })
 export class ApiClientStateEffect {
@@ -12,29 +12,31 @@ export class ApiClientStateEffect {
     return this.actions$.pipe(
       ofType(apiClientActions.GET_API_CLIENT_LIST_START),
       switchMap((action: apiClientActions.GetApiClientListStart) => {
-        return this.apiClientService.getApiClientPaginatedData(action.pageNumber).pipe(
-          map((response) => {
-            return new apiClientActions.GetApiClientListSuccess(response);
-          }),
-          catchError((error) => {
-            console.log(error);
-            throw error;
-          })
-        );
+        return this.apiClientService
+          .getApiClientPaginatedData(action.pageNumber)
+          .pipe(
+            map((response) => {
+              return new apiClientActions.GetApiClientListSuccess(response);
+            }),
+            catchError((error) => {
+              console.log(error);
+              throw error;
+            })
+          );
       })
     );
   });
 
-  public fetchApiClientCount$: Observable<Action> = createEffect(() => {
+  public getApiClientDetails$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
-      ofType(apiClientActions.GET_API_CLIENT_COUNT),
-      switchMap((action: apiClientActions.ApiClientActions) => {
-        return this.apiClientService.getTotalApiClientCount().pipe(
+      ofType(apiClientActions.GET_API_CLIENT_START),
+      switchMap((action: apiClientActions.GetApiClientStart) => {
+        return this.apiClientService.getApiClientDetails(action.clientId).pipe(
           map((response) => {
-            return new apiClientActions.GetApiClientCountSuccess(response);
+            return new apiClientActions.GetApiClientSuccess(response);
           }),
           catchError((error) => {
-            console.log(error);
+            console.error(error);
             throw error;
           })
         );
@@ -43,7 +45,7 @@ export class ApiClientStateEffect {
   });
 
   constructor(
-    private apiClientService: ApiClientMockService,
+    private apiClientService: ApiClientService,
     private actions$: Actions
   ) {}
 }

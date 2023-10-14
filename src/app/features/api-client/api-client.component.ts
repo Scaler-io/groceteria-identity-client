@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import {
   getApiList,
-  getApiTotal,
   getPaginationMetaData,
 } from 'src/app/state/api-client/api-client.selector';
 import { ApiClientSummary } from 'src/app/core/models/api-client';
@@ -12,24 +11,21 @@ import * as moment from 'moment';
 import * as apiClientActions from '../../state/api-client/api-client.action';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaginationMetadata } from 'src/app/core/models/paginated-result';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { getApiClientCount } from 'src/app/state/app-count/app-count.selector';
 
 @Component({
   selector: 'groceteria-api-client',
   templateUrl: './api-client.component.html',
   styleUrls: ['./api-client.component.scss'],
 })
-export class ApiClientComponent implements OnInit, OnDestroy {
+export class ApiClientComponent implements OnInit, OnChanges, OnDestroy {
   public apiClients: MatTableDataSource<ApiClientSummary> =
     new MatTableDataSource<ApiClientSummary>([]);
   public paginationMetaData: PaginationMetadata = null;
   public totalItems: number;
   public isApiDataLoaded: boolean;
+  private currentPage: number;
   public displayedColumns = [
     'clientName',
     'clientId',
@@ -52,6 +48,14 @@ export class ApiClientComponent implements OnInit, OnDestroy {
     totalApiCount: null,
   };
 
+  ngOnChanges(): void {
+    if (!this.route.snapshot.queryParamMap.has('page')) {
+      const queryParams = { ...this.route.snapshot.queryParams };
+      queryParams['page'] = 1;
+      this.router.navigate([], { queryParams: queryParams });
+    }
+  }
+
   ngOnInit(): void {
     if (!this.route.snapshot.queryParamMap.has('page')) {
       const queryParams = { ...this.route.snapshot.queryParams };
@@ -60,11 +64,9 @@ export class ApiClientComponent implements OnInit, OnDestroy {
     }
 
     this.route.queryParamMap.subscribe((query) => {
-      const currentPage = +query.get('page');
-      this.store.dispatch(
-        new apiClientActions.GetApiClientListStart(currentPage)
-      );
-      this.store.dispatch(new apiClientActions.GetApiClientCount());
+      const page = +query.get('page');
+      if (page)
+        this.store.dispatch(new apiClientActions.GetApiClientListStart(page));
     });
 
     this.subscriptions.paginationMetadata = this.store
@@ -76,7 +78,7 @@ export class ApiClientComponent implements OnInit, OnDestroy {
     this.subscriptions.apiClietList = this.store
       .select(getApiList)
       .subscribe((response) => {
-        if (response.length !== 0) {
+        if (response && response.length > 0) {
           this.isApiDataLoaded = true;
         } else {
           this.isApiDataLoaded = false;
@@ -85,7 +87,7 @@ export class ApiClientComponent implements OnInit, OnDestroy {
       });
 
     this.subscriptions.totalApiCount = this.store
-      .select(getApiTotal)
+      .select(getApiClientCount)
       .subscribe((response) => {
         this.totalItems = response;
       });
@@ -117,5 +119,9 @@ export class ApiClientComponent implements OnInit, OnDestroy {
 
   public get dataFound() {
     return this.apiClients.filteredData.length !== 0;
+  }
+
+  public navigateToDetails(clientId: string) {
+    this.router.navigate(['client', clientId]);
   }
 }

@@ -1,10 +1,13 @@
 import { Action } from '@ngrx/store';
-import { PaginatedApiClientList } from 'src/app/core/models/api-client';
+import {
+  ApiClient,
+  PaginatedApiClientList,
+} from 'src/app/core/models/api-client';
 
 export const GET_API_CLIENT_LIST_START = 'GET_API_CLIENT_LIST_START';
 export const GET_API_CLIENT_LIST_SUCCESS = 'GET_API_CLIENT_LIST_SUCCESS';
-export const GET_API_CLIENT_COUNT = 'GET_API_CLIENT_COUNT';
-export const GET_API_CLIENT_COUNT_SUCCESS = 'GET_API_CLIENT_COUNT_SUCCESS';
+export const GET_API_CLIENT_START = 'GET_API_CLIENT_START';
+export const GET_API_CLIENT_SUCCESS = 'GET_API_CLIENT_SUCCESS';
 
 export class GetApiClientListStart implements Action {
   readonly type = GET_API_CLIENT_LIST_START;
@@ -16,18 +19,18 @@ export class GetApiClientListSuccess implements Action {
   constructor(public payload: PaginatedApiClientList) {}
 }
 
-export class GetApiClientCount implements Action {
-  readonly type = GET_API_CLIENT_COUNT;
-  constructor(public payload?: number) {}
+export class GetApiClientStart implements Action {
+  readonly type = GET_API_CLIENT_START;
+  constructor(public clientId: string) {}
 }
 
-export class GetApiClientCountSuccess implements Action {
-  readonly type = GET_API_CLIENT_COUNT_SUCCESS;
-  constructor(public payload: number) {}
+export class GetApiClientSuccess implements Action {
+  readonly type = GET_API_CLIENT_SUCCESS;
+  constructor(public payload: ApiClient) {}
 }
 
 export type ApiClientActions =
   | GetApiClientListStart
   | GetApiClientListSuccess
-  | GetApiClientCount
-  | GetApiClientCountSuccess;
+  | GetApiClientStart
+  | GetApiClientSuccess;

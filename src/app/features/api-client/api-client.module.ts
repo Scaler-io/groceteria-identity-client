@@ -13,6 +13,7 @@ import { AppMaterialModule } from 'src/app/app-material.module';
 import { DataSearchModule } from 'src/app/shared/components/data-search/data-search.module';
 import { PipesModule } from 'src/app/shared/pipes/pipes-module.module';
 import { PaginatorModule } from 'src/app/shared/components/paginator/paginator.module';
+import { ApiClientDetailsModule } from './api-client-details/api-client-details.module';
 
 @NgModule({
   declarations: [ApiClientComponent],
@@ -22,6 +23,7 @@ import { PaginatorModule } from 'src/app/shared/components/paginator/paginator.m
     ApiClientRoutingModule,
     AppMaterialModule,
     PaginatorModule,
+    ApiClientDetailsModule,
     PipesModule,
     EffectsModule.forFeature([ApiClientStateEffect]),
     StoreModule.forFeature(API_CLIENT_STATE_NAME, apiClientReducer),
