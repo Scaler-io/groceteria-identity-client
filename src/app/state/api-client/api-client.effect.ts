@@ -5,6 +5,7 @@ import { Observable, catchError, map, switchMap } from 'rxjs';
 
 import * as apiClientActions from '../../state/api-client/api-client.action';
 import { ApiClientService } from 'src/app/core/services/api-client.service';
+import { ApiClientMockService } from 'src/app/core/services/mock/api-client.mock.service';
 
 @Injectable({ providedIn: 'root' })
 export class ApiClientStateEffect {
@@ -45,7 +46,7 @@ export class ApiClientStateEffect {
   });
 
   constructor(
-    private apiClientService: ApiClientService,
+    private apiClientService: ApiClientMockService,
     private actions$: Actions
   ) {}
 }

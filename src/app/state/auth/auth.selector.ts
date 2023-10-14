@@ -6,4 +6,3 @@ const state = createFeatureSelector<AuthState>(AUTH_STATE_NAME);
 export const getAuthUser = createSelector(state, (state: AuthState) => {
   return state.user;
 });
-

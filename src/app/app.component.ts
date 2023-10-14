@@ -85,7 +85,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .isAuthenticated()
       .pipe(
         switchMap((response) => {
-          console.log('working auth');
           this.isAuthenticated = response.isAuthenticated;
           if (!response.isAuthenticated) {
             this.authService.authorize();
@@ -96,7 +95,6 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((response) => {
-        console.log('working count');
         if (response && response.apiClientCount === 0) {
           this.loadAppCount();
         }

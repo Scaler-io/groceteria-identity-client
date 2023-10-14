@@ -7,6 +7,7 @@ import {
 } from './app-count.action';
 import { Injectable } from '@angular/core';
 import { ApiClientService } from 'src/app/core/services/api-client.service';
+import { ApiClientMockService } from 'src/app/core/services/mock/api-client.mock.service';
 
 @Injectable()
 export class AppCountEffect {
@@ -16,8 +17,6 @@ export class AppCountEffect {
       switchMap(() => {
         return this.apiClientService.getTotalApiClientCount().pipe(
           map((response) => {
-            console.log(response)
-            console.log(response);
             return new GetApiClientCountSuccess(response);
           }),
           catchError((error) => {
@@ -31,6 +30,6 @@ export class AppCountEffect {
 
   constructor(
     private actions$: Actions,
-    private apiClientService: ApiClientService
+    private apiClientService: ApiClientMockService
   ) {}
 }

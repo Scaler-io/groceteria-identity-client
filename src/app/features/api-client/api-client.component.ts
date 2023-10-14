@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import {
@@ -6,26 +6,25 @@ import {
   getPaginationMetaData,
 } from 'src/app/state/api-client/api-client.selector';
 import { ApiClientSummary } from 'src/app/core/models/api-client';
-import * as moment from 'moment';
-
-import * as apiClientActions from '../../state/api-client/api-client.action';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaginationMetadata } from 'src/app/core/models/paginated-result';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Params, Router } from '@angular/router';
 import { getApiClientCount } from 'src/app/state/app-count/app-count.selector';
+import * as moment from 'moment';
+import * as apiClientActions from '../../state/api-client/api-client.action';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'groceteria-api-client',
   templateUrl: './api-client.component.html',
   styleUrls: ['./api-client.component.scss'],
 })
-export class ApiClientComponent implements OnInit, OnChanges, OnDestroy {
+export class ApiClientComponent implements OnInit, OnDestroy {
   public apiClients: MatTableDataSource<ApiClientSummary> =
     new MatTableDataSource<ApiClientSummary>([]);
   public paginationMetaData: PaginationMetadata = null;
   public totalItems: number;
   public isApiDataLoaded: boolean;
-  private currentPage: number;
   public displayedColumns = [
     'clientName',
     'clientId',
@@ -48,15 +47,13 @@ export class ApiClientComponent implements OnInit, OnChanges, OnDestroy {
     totalApiCount: null,
   };
 
-  ngOnChanges(): void {
-    if (!this.route.snapshot.queryParamMap.has('page')) {
-      const queryParams = { ...this.route.snapshot.queryParams };
-      queryParams['page'] = 1;
-      this.router.navigate([], { queryParams: queryParams });
-    }
-  }
-
   ngOnInit(): void {
+    this.router.events.subscribe(e => {
+      if(e instanceof NavigationEnd && this.router.url.includes('client?page=1')){
+        this.router.navigate([], {queryParams: {'page': 1}})
+      }
+    })
+
     if (!this.route.snapshot.queryParamMap.has('page')) {
       const queryParams = { ...this.route.snapshot.queryParams };
       queryParams['page'] = 1;
@@ -86,11 +83,16 @@ export class ApiClientComponent implements OnInit, OnChanges, OnDestroy {
         this.apiClients.data = response;
       });
 
-    this.subscriptions.totalApiCount = this.store
-      .select(getApiClientCount)
-      .subscribe((response) => {
-        this.totalItems = response;
-      });
+    this.subscriptions.totalApiCount = this.getApiTotalCount().subscribe(
+      (query) => {
+        const page = query['page'];
+        if (page && this.totalItems > 0) {
+          if (page > Math.ceil(this.totalItems / 20)) {
+            this.router.navigate([], { queryParams: { page: 1 } });
+          }
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -123,5 +125,15 @@ export class ApiClientComponent implements OnInit, OnChanges, OnDestroy {
 
   public navigateToDetails(clientId: string) {
     this.router.navigate(['client', clientId]);
+  }
+
+  private getApiTotalCount(): Observable<Params> {
+    const queryParams$ = this.route.queryParams;
+    return this.store.select(getApiClientCount).pipe(
+      switchMap((response) => {
+        this.totalItems = response;
+        return queryParams$;
+      })
+    );
   }
 }
